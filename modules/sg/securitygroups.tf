@@ -124,4 +124,3 @@ resource "aws_security_group" "albsg" {
       Name = var.kapil-sg-alb
     }
 }
-
