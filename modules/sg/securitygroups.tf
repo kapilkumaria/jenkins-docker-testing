@@ -35,16 +35,23 @@ resource "aws_security_group" "websg" {
       from_port         = 22
       to_port           = 22
       protocol          = "TCP"
-      security_groups   = [aws_security_group.bastionsg.id]
+      cidr_blocks	= ["0.0.0.0/0"]
     }
 
     ingress {
       description       = "Allow HTTP traffic from application LB only"
-      from_port         = 80
-      to_port           = 80
+      from_port         = 3000
+      to_port           = 3000
       protocol          = "TCP"
-      security_groups   = [aws_security_group.albsg.id]
+      cidr_blocks	= ["0.0.0.0/0"]
     }
+
+    ingress {
+      description	= "Allow port 8080 for Jenkins"
+      from_port		= 8080
+      to_port		= 8080
+      protocol		= "TCP"
+      cidr_blocks	= ["0.0.0.0/0"]
 
     egress {
     from_port   = 0
